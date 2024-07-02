@@ -1,0 +1,15 @@
+ul.socials {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+ul.socials li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+ul.socials li a {
+  text-decoration: none;
+}

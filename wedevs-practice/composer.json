@@ -1,0 +1,20 @@
+{
+  "name": "arifhsn/wedevs-practice",
+  "description": "A plugin to learn plugin devs",
+  "type": "wordpress-plugin",
+  "license": "GPLv2",
+  "autoload": {
+    "psr-4": {
+      "Wedevs\\Practice\\": "includes/"
+    },
+    "files": []
+  },
+  "authors": [
+    {
+      "name": "Arif Hassan",
+      "email": "aarifhsn@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}

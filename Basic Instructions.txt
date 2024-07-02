@@ -1,0 +1,6 @@
+## WP PLUGIN DEVELOPMENT
+
+* When we call a function in the procedural way, we must have to use prefix in a function name. Because this can be conflicted to other.
+* When we call a function in a OOP way, we have to use special prefix in the class name. but the inner functions name doesn't need to use prefix, we can simply call them e.g. change_title(); . Mean when it is in class, there is no change to be conflicted. 
+
+
