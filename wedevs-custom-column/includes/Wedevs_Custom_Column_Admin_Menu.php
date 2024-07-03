@@ -27,10 +27,8 @@ class Wedevs_Custom_Column_Admin_Menu
 
     public function wcc_customize_menu_page()
     {
-        $posts_args = array(
-            'post_type' => 'post',
+        $posts_args = array('post_type' => 'post');
 
-        );
         if (isset($_GET['wcc_cat']) && $_GET['wcc_cat'] != '-1') {
             $posts_args['tax_query'] = array(
                 array(
@@ -40,11 +38,19 @@ class Wedevs_Custom_Column_Admin_Menu
                 ),
             );
         }
+        if (isset($_GET['wcc_author']) && $_GET['wcc_author'] != '-1') {
+            $posts_args['author'] = $_GET['wcc_author'];
+        }
 
         $posts = get_posts($posts_args);
 
         $terms = get_terms(array(
             'taxonomy' => 'category'
+        ));
+
+        $authors = get_users(array(
+            'role_in' => '',
+            'has_published_posts' => true,
         ));
 
         include_once plugin_dir_path(__FILE__) . 'templates/wcc_customize_menu_page.php';
