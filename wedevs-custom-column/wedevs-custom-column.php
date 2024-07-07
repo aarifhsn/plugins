@@ -31,7 +31,12 @@ if (!class_exists('Wedevs_Custom_Column')) {
         private function required_classes()
         {
             require_once plugin_dir_path(__FILE__) . '/includes/Wedevs_Custom_Column_Admin_Menu.php';
+            require_once plugin_dir_path(__FILE__) . '/includes/Wedevs_Post_Column.php';
+            require_once plugin_dir_path(__FILE__) . '/includes/Wedevs_Posts_Type.php';
+
             new Wedevs_Custom_Column_Admin_Menu();
+            new Wedevs_Post_Column();
+            new Wedevs_Posts_Type();
         }
     }
 
