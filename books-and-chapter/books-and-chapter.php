@@ -18,17 +18,22 @@ class Books_And_Chapter
 
     public function __construct()
     {
-        add_action('init', array($this, 'init'));
-        add_action('init', array($this, 'afs_books_post_type'));
-        add_action('init', array($this, 'afs_chapter_post_type'));
-        add_action('add_meta_boxes', array($this, 'afs_books_and_chapter_meta_box'));
-        add_action('save_post', array($this, 'afs_books_save_meta_box'));
-        add_filter('the_content', array($this, 'afs_books_content'));
-        //add_action('admin_menu', array($this, 'afs_move_chapter_to_book'));
+        add_action('init', [$this, 'initialize']);
     }
 
-    function init()
+    public function initialize()
     {
+        $this->afs_books_post_type();
+        $this->afs_chapter_post_type();
+        add_action('add_meta_boxes', array($this, 'afs_books_and_chapter_meta_box'));
+        add_action('save_post', array($this, 'afs_books_save_meta_box'));
+        add_filter('the_content', array($this, 'afs_show_chapter_in_books_content'));
+        add_filter('the_content', array($this, 'afs_show_books_in_chapter'));
+        //add_action('admin_menu', array($this, 'afs_move_chapter_to_book'));
+        add_filter('manage_book_posts_columns', array($this, 'afs_add_custom_columns_to_book'), 10, 1);
+        add_action('manage_book_posts_custom_column', array($this, 'afs_manage_posts_book_column'), 10, 2);
+        add_filter('manage_chapter_posts_columns', array($this, 'afs_add_custom_columns_to_chapter'), 10, 1);
+        add_action('manage_chapter_posts_custom_column', array($this, 'afs_manage_posts_chapter_column'), 10, 2);
     }
 
     public function afs_books_post_type()
@@ -122,6 +127,7 @@ class Books_And_Chapter
     public function afs_chapter_meta_box_callback($post)
     {
         $chapter_source = get_post_meta($post->ID, 'chapter_source', true);
+        $chapter_number = get_post_meta($post->ID, 'chapter_number', true);
 
         $books = get_posts(array(
             'post_type' => 'book',
@@ -139,6 +145,10 @@ class Books_And_Chapter
                 <?php endforeach; ?>
             </select>
         </p>
+        <p>
+            <label for="chapter_number">Chapter Number:</label>
+            <input type="number" name="chapter_number" id="chapter_number" value="<?php echo $chapter_number; ?>" />
+        </p>
 <?php }
 
     public function afs_books_save_meta_box($post_id)
@@ -153,15 +163,117 @@ class Books_And_Chapter
         if (isset($_POST['chapter_source'])) {
             update_post_meta($post_id, 'chapter_source', $_POST['chapter_source']);
         }
+        if (isset($_POST['chapter_number'])) {
+            update_post_meta($post_id, 'chapter_number', $_POST['chapter_number']);
+        }
     }
 
-    public function afs_books_content($content)
+    public function afs_show_chapter_in_books_content($content)
     {
+        // check if post type is book and has chapters
         if (is_singular('book')) {
-            $heading = '<h3>Chapters</h3>';
-            $content .= $heading;
+            $book_id = get_the_ID();
+            $chapters = get_posts(array(
+                'post_type' => 'chapter',
+                'meta_query'    => array(
+                    array(
+                        'key' => 'chapter_source',
+                        'value' => $book_id,
+                        'compare' => '='
+                    )
+                ),
+                'meta_key'  =>  'chapter_number',
+                'orderby' => 'meta_value_num',
+                'order' => 'ASC',
+                'posts_per_page' => -1
+            ));
+            if (!empty($chapters)) {
+                $heading = '<h3>Chapters</h3>';
+                $content .= $heading;
+                $content .= '<ul>';
+                foreach ($chapters as $chapter) {
+                    $content .= '<li><a href="' . get_permalink($chapter->ID) . '">' . $chapter->post_title . '</a></li>';
+                }
+                $content .= '</ul>';
+            }
         }
         return $content;
+    }
+
+
+    public function afs_show_books_in_chapter($content)
+    {
+
+        if (is_singular('chapter')) {
+            $chapter_id = get_the_ID();
+            $book_id = get_post_meta($chapter_id, 'chapter_source', true);
+            $books = get_post($book_id);
+            $thumbnail = get_the_post_thumbnail($book_id, 'thumbnail');
+            $heading = '<h3>Book</h3>';
+            $thumbnail_html = '<p><a href="' . get_permalink($book_id) . '">' . $thumbnail . '</a></p>';
+            $content .= $heading;
+            $content .= $thumbnail_html;
+            $content .= '<h2><a href="' . get_permalink($book_id) . '">' . $books->post_title . '</a></h2>';
+        }
+        return $content;
+    }
+
+
+
+    // add custom columns (thumbnails and chapter number) to book post type
+    public function afs_add_custom_columns_to_book($columns)
+    {
+        $new_columns = [];
+        foreach ($columns as $key => $value) {
+            $new_columns[$key] = $value;
+            if ($key == 'cb') {
+                $new_columns['thumbnail'] = 'Thumbnail';
+            } elseif ($key == 'title') {
+                $new_columns['chapter_number'] = 'Chapters';
+            }
+        }
+        return $new_columns;
+    }
+
+    public function afs_manage_posts_book_column($column, $post_id)
+    {
+        if ($column == 'thumbnail') {
+            $book_id = get_post_meta($post_id, 'chapter_source', true);
+            $thumbnail = get_the_post_thumbnail($book_id, 'thumbnail');
+            echo $thumbnail;
+        } elseif ($column == 'chapter_number') {
+            $chapter_number = get_post_meta($post_id, 'chapter_number', true);
+            echo $chapter_number;
+        }
+    }
+
+    public function afs_add_custom_columns_to_chapter($columns)
+    {
+        $new_columns = [];
+        foreach ($columns as $key => $value) {
+            $new_columns[$key] = $value;
+            if ($key == 'title') {
+                $new_columns['book'] = 'Book';
+            }
+        }
+        return $new_columns;
+    }
+
+    public function afs_manage_posts_chapter_column($column, $post_id)
+    {
+        if ($column == 'book') {
+            $book_id = get_post_meta($post_id, 'chapter_source', true);
+            $book = get_post($book_id);
+            echo $book->post_title;
+        }
+    }
+
+    // remove chapter page default pagination and create a custom one
+    public function afs_remove_chapter_page_pagination()
+    {
+        if (is_singular('chapter')) {
+            remove_action('wp_loaded', 'twentytwentyfour_page_pagination');
+        }
     }
 }
 
