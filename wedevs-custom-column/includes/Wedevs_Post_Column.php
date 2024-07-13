@@ -35,12 +35,20 @@ if (!class_exists('Wedevs_Post_Column')) {
                     $new_columns['thumbnail'] = 'Thumbnail';
                 }
 
-                // Add 'view' column after 'author' column
+                // add view column
                 if ('author' == $key) {
                     $new_columns['view'] = 'View';
                 }
             }
             return $new_columns; // Return the new columns array after the loop
+        }
+
+        public function wcc_default_hidden_columns($hidden, $screen)
+        {
+            if ($screen->post_type === 'page') {
+                $hidden[] = 'view';
+            }
+            return $hidden;
         }
 
 
