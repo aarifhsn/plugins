@@ -1,3 +1,6 @@
+.afs_related_posts {
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
 .afs_related_posts ul {
   display: flex;
   gap: 20px;
@@ -5,24 +8,24 @@
   padding: 0;
 }
 
-.afs_related_posts {
-  border-top: 2px solid #ddd;
+.afs_related_posts .owl-stage-outer {
   margin-top: 50px;
+  padding: 10px 0;
 }
 
 .afs_related_posts h5 {
   text-align: center;
-  margin: 25px 0;
+  margin: 20px 0 0 0;
   text-transform: uppercase;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
+  font-weight: bold;
 }
-
 .afs_related_posts ul li {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  width: 33%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   display: block;
   position: relative;
   overflow: hidden;
+  margin: 0 5px;
 }
 
 .afs_related_posts ul li div.post_content {
@@ -53,7 +56,7 @@
   text-transform: capitalize;
 }
 .afs_related_posts li .post_thumb img {
-  height: auto;
+  height: 240px;
   width: 100%;
 }
 .afs_related_posts .post_author img {
@@ -71,4 +74,21 @@
 .afs_related_posts .author_content .post_author_name {
   font-size: 14px;
   font-weight: bold;
+}
+
+/* carousel css */
+.owl-nav {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 30px;
+  font-weight: bold;
+}
+.owl-nav button {
+  border: 1 px solid rgba(0, 0, 0, 0.24) !important;
+  display: inline-block;
+  border-radius: 50%;
+  padding: 10px;
 }
