@@ -16,11 +16,6 @@ class Afs_Related_Posts
     {
         $version = AFS_RP_VERSION;
 
-        // Enqueue the compiled Tailwind CSS
-        $afs_assets_path = plugins_url('../assets', __FILE__);
-        wp_enqueue_style('tailwind-css', $afs_assets_path . '/css/tailwind.css', array(), $version);
-
-
         // Enqueue plugin's CSS and JS
         $afs_assets_path = plugins_url('../assets', __FILE__); // Points to root/assets/
         $afs_css_path = $afs_assets_path . '/css/';
@@ -51,7 +46,7 @@ class Afs_Related_Posts
             if ($query->have_posts()) {
                 $content .= '<div class="afs_related_posts">';
                 $content .= '<h5>' . __('Related Posts', 'related-posts') . '</h5>';
-                $content .= '<ul>';
+                $content .= '<ul class="w-3">';
                 while ($query->have_posts()) {
                     $query->the_post();
                     $content .= '<li>';
