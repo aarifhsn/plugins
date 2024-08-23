@@ -39,6 +39,7 @@ class Books_And_Chapter
         $custom_columns = new Custom_Columns();
 
         add_action('init', [$books_post_type, 'register']);
+        add_action('init', [$books_post_type, 'register_taxonomy']);
         add_action('init', [$chapters_post_type, 'register']);
         add_action('add_meta_boxes', [$meta_boxes, 'register']);
         add_action('save_post', [$meta_boxes, 'save']);

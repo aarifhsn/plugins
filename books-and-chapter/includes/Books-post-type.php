@@ -21,28 +21,21 @@ class Books_Post_Type
             'hierarchical' => false,
             'menu_position' => null,
             'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
-            'show_in_rest' => true,
+            'show_in_rest' => false,
             'menu_icon' => 'dashicons-book',
+            'taxonomy'  => ['genre', 'movie']
         );
         register_post_type('book', $args);
+    }
 
-        $args = array(
-            'labels' => array(
-                'name' => __('Book Genre', 'afs'),
-                'singular_name' => __('Book Genre', 'afs'),
-                'search_items' => __('Search Book Genre', 'afs'),
-                'all_items' => __('All Book Genre', 'afs'),
-            ),
+    public function register_taxonomy()
+    {
+        register_taxonomy('genre', ['book', 'post'], [
+            'labels' => [
+                'name' => 'Genre',
+                'singular_name' => 'Genre',
+            ],
             'hierarchical' => true,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'show_in_nav_menus' => true,
-            'query_var' => true,
-            'rewrite' => array('slug' => 'book-genre', 'with_front' => false),
-            'has_archive' => true,
-            'show_admin_column' => true,
-            'show_in_rest' => true,
-        );
-        register_taxonomy('book_genre', 'book', $args);
+        ]);
     }
 }
