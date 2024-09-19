@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Related Posts
- * Plugin URI: https://wordpress.org/plugins/related-posts/
+ * Plugin URI: https://github.com/aarifhsn/plugins/tree/main/related-posts
  * Description: Show Related Posts on Single Post's Page
  * Version: 1.0.0
  * Author: Arif Hassan

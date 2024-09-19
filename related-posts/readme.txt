@@ -1,5 +1,5 @@
 === AFS Related Posts ===
-Contributors: Arifhassan
+Contributors: Arif hassan
 Tags: related posts, carousel, owl carousel, posts, author bio, related content
 Requires at least: 5.0
 Tested up to: 6.6.1
