@@ -20,7 +20,8 @@ class Books_And_Chapter
             'Custom-columns.php',
             'Permalinks.php',
             'Content-filters.php',
-            'Admin-menu.php'
+            'Admin-menu.php',
+            'src/settings-menu.php'
         ];
 
         foreach ($dependencies as $file) {
@@ -37,6 +38,7 @@ class Books_And_Chapter
         $chapters_post_type = new Chapters_Post_Type();
         $meta_boxes = new Meta_Boxes();
         $custom_columns = new Custom_Columns();
+        $settings_menu = new Books_And_Chapter_Settings_Menu();
 
         add_action('init', [$books_post_type, 'register']);
         add_action('init', [$books_post_type, 'register_taxonomy']);
@@ -47,6 +49,8 @@ class Books_And_Chapter
         add_action('manage_book_posts_custom_column', [$custom_columns, 'manage_book'], 10, 2);
         add_filter('manage_chapter_posts_columns', [$custom_columns, 'add_to_chapter']);
         add_action('manage_chapter_posts_custom_column', [$custom_columns, 'manage_chapter'], 10, 2);
+        add_action('admin_menu', [$settings_menu, 'bnc_add_settings_menu']);
+
     }
 
     private function define_afs_public_hooks()
