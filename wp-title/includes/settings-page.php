@@ -23,10 +23,8 @@ class afs_reading_time_settings_page
 
     public function sub_menu_load_settings()
     {
-        echo '<h1>WP Title Help Page</h1>';
+        echo '<div id="react-app"></div>';
     }
-
-
 }
 
 new afs_reading_time_settings_page();  // Ensure this class is initialized

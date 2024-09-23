@@ -17,6 +17,7 @@ class afs_reading_time
     public function __construct()
     {
         add_action('init', array($this, 'initialize'));
+        add_action('admin_enqueue_scripts', array($this, 'wpt_enqueue_scripts'));
     }
 
     public function initialize()
@@ -37,6 +38,17 @@ class afs_reading_time
         $minutes = ceil($words / 180);
         $time = "<h4>" . $minutes . ' min. ' . " to read</h4>";
         return $content . $time;
+    }
+
+    function wpt_enqueue_scripts($hook)
+    {
+        if ($hook == 'wp-title_page_wp-title-help') {
+            $main_js = require __DIR__ . '/assets/settings/scripts.asset.php';
+
+            wp_enqueue_script('wpt-script', plugin_dir_url(__FILE__) . './assets/settings/scripts.js', $main_js['dependencies'], $main_js['version'], array('in_footer' => true));
+
+            wp_localize_script('wpt-script', 'wpt_data', array('ajaxurl' => admin_url('admin-ajax.php')));
+        }
     }
 }
 

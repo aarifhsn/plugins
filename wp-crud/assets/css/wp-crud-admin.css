@@ -1,0 +1,52 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+}
+.wp_crud_wrap h2 {
+  margin: 20px 0 40px 0;
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+}
+.wp_crud_wrap h3 {
+  margin: 30px 0 10px 0;
+}
+.wp_crud_wrap .wp_crud_form {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.wp_crud_wrap .wp_crud_form input[type="text"],
+.wp_crud_wrap .wp_crud_form input[type="email"] {
+  width: 300px;
+}
+/*  style the label*/
+
+.wp_crud_wrap .wp_crud_form p label {
+  font-weight: bold;
+}
+.wp_crud_edit_wrap {
+  width: 60%;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 20px;
+}
+
+.wp_crud_edit_wrap h2 {
+  font-size: 22px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+.wp_crud_edit_wrap form p {
+  margin-bottom: 20px;
+}
+
+.wp_crud_edit_wrap form p label {
+  font-weight: bold;
+  margin-right: 20px;
+}
+.wp_crud_edit_wrap form p input[type="text"],
+.wp_crud_edit_wrap form p input[type="email"] {
+  width: 300px;
+}
