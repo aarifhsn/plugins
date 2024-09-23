@@ -2,15 +2,19 @@
 body {
   font-family: Arial, sans-serif;
 }
-.wp_crud_wrap h2 {
+
+.wp_crud_wrap h1,
+.wp_crud_page_title h1 {
   margin: 20px 0 40px 0;
   font-size: 24px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 15px;
 }
+
 .wp_crud_wrap h3 {
   margin: 30px 0 10px 0;
 }
+
 .wp_crud_wrap .wp_crud_form {
   display: flex;
   gap: 25px;
@@ -20,12 +24,16 @@ body {
 .wp_crud_wrap .wp_crud_form input[type="text"],
 .wp_crud_wrap .wp_crud_form input[type="email"] {
   width: 300px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
 }
-/*  style the label*/
 
+/* Style the label */
 .wp_crud_wrap .wp_crud_form p label {
   font-weight: bold;
 }
+
 .wp_crud_edit_wrap {
   width: 60%;
   margin: 20px auto;
@@ -38,6 +46,7 @@ body {
   border-bottom: 1px solid #ddd;
   padding-bottom: 20px;
 }
+
 .wp_crud_edit_wrap form p {
   margin-bottom: 20px;
 }
@@ -46,7 +55,57 @@ body {
   font-weight: bold;
   margin-right: 20px;
 }
+
 .wp_crud_edit_wrap form p input[type="text"],
 .wp_crud_edit_wrap form p input[type="email"] {
   width: 300px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+/* Table Styles */
+.wp_crud_wrap table {
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.wp_crud_wrap table th,
+.wp_crud_wrap table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.wp_crud_wrap table th {
+  background-color: #f9f9f9;
+}
+
+/* Button Styles */
+.wp_crud_wrap .button-primary,
+.wp_crud_wrap .button-secondary {
+  padding: 4px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.wp_crud_wrap .button-primary {
+  background-color: #0073aa;
+  color: white;
+  border: none;
+}
+
+.wp_crud_wrap .button-primary:hover {
+  background-color: #005177;
+}
+
+.wp_crud_wrap .button-secondary {
+  background-color: #f1f1f1;
+  color: #555;
+  border: 1px solid #ccc;
+}
+
+.wp_crud_wrap .button-secondary:hover {
+  background-color: #ddd;
 }
