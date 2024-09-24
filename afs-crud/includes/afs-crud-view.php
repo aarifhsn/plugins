@@ -6,7 +6,7 @@
  * This class is responsible for rendering the user data and templates 
  * in the WordPress admin area.
  *
- * @package WP_CRUD
+ * @package AFS_CRUD
  * @since 1.0.0
  */
 
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_CRUD_View
+class AFS_CRUD_View
 {
 
     /**
@@ -29,7 +29,7 @@ class WP_CRUD_View
      */
     public function display_users($users, $orderby, $order)
     {
-        include WP_CRUD_PATH . 'templates/wp-crud-display.php';
+        include AFS_CRUD_PATH . 'templates/afs-crud-display.php';
     }
 
     /**
@@ -42,6 +42,6 @@ class WP_CRUD_View
      */
     public function edit_user($user)
     {
-        include WP_CRUD_PATH . 'includes/wp-crud-edit-user.php';
+        include AFS_CRUD_PATH . 'includes/afs-crud-edit-user.php';
     }
 }

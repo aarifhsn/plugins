@@ -6,7 +6,7 @@
  * This class interacts with the WordPress database using the $wpdb object to
  * perform CRUD (Create, Read, Update, Delete) operations for custom users.
  *
- * @package WP_CRUD
+ * @package AFS_CRUD
  * @since 1.0.0
  */
 
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WP_CRUD_Model
+class AFS_CRUD_Model
 {
     private $table_name;
 
@@ -38,7 +38,7 @@ class WP_CRUD_Model
      * 
      * @since 1.0.0
      */
-    public function wp_crud_create_table()
+    public function afs_crud_create_table()
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
@@ -69,8 +69,8 @@ class WP_CRUD_Model
         $table_name = $this->table_name;
 
         // Check if the table exists before dropping it
-        if ($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") === $table_name) {
-            $wpdb->query("DROP TABLE IF EXISTS {$table_name}");
+        if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name)) === $table_name) {
+            $wpdb->query($wpdb->prepare("DROP TABLE IF EXISTS %s", $table_name));
         }
     }
 
@@ -87,8 +87,7 @@ class WP_CRUD_Model
     {
         global $wpdb;
 
-        $query = $wpdb->prepare("SELECT * FROM {$this->table_name} ORDER BY {$orderby} {$order}");
-        return $wpdb->get_results($query);
+        return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_name} ORDER BY {$orderby} {$order}"));
     }
 
     /**
@@ -103,8 +102,7 @@ class WP_CRUD_Model
     {
         global $wpdb;
         // Use a prepared statement to safely retrieve a user by ID.
-        $query = $wpdb->prepare("SELECT * FROM $this->table_name WHERE id = %d", $id);
-        return $wpdb->get_row($query);
+        return $wpdb->get_row($wpdb->prepare("SELECT * FROM $this->table_name WHERE id = %d", $id));
     }
 
     /**

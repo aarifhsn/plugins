@@ -1,10 +1,10 @@
 <?php
 
 /**
- * WP_CRUD_Controller class handles user interactions (CRUD operations) and connects
+ * AFS_CRUD_Controller class handles user interactions (CRUD operations) and connects
  * the model and view components of the plugin.
  *
- * @package WP_CRUD
+ * @package AFS_CRUD
  * @since 1.0.0
  */
 
@@ -14,12 +14,12 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WP_CRUD_Controller
+ * Class AFS_CRUD_Controller
  * 
  * This class controls the CRUD functionality for users, initializes hooks,
  * and manages the data flow between the model and view.
  */
-class WP_CRUD_Controller
+class AFS_CRUD_Controller
 {
 
     private $model;
@@ -31,23 +31,23 @@ class WP_CRUD_Controller
      */
     public function __construct()
     {
-        $this->model = new WP_CRUD_Model();
-        $this->view = new WP_CRUD_View();
+        $this->model = new AFS_CRUD_Model();
+        $this->view = new AFS_CRUD_View();
 
         // Initialize hooks and actions
-        add_action('init', array($this, 'wp_crud_create_table'));
+        add_action('init', array($this, 'afs_crud_create_table'));
         add_action('admin_post_add_user', array($this, 'add_user'));
         add_action('admin_post_edit_user', array($this, 'edit_user'));
         add_action('admin_post_delete_user', array($this, 'delete_user'));
-        add_action('admin_enqueue_scripts', array($this, 'wp_crud_enqueue_scripts'));
+        add_action('admin_enqueue_scripts', array($this, 'afs_crud_enqueue_scripts'));
     }
 
     /**
      * Creates the users table when the plugin is activated.
      */
-    public function wp_crud_create_table()
+    public function afs_crud_create_table()
     {
-        $this->model->wp_crud_create_table();
+        $this->model->afs_crud_create_table();
     }
 
     /**
@@ -56,15 +56,15 @@ class WP_CRUD_Controller
      * @since 1.0.0
      * 
      */
-    public function wp_crud_display_users()
+    public function afs_crud_display_users()
     {
         // Check nonce for security
         // Check if the action and nonce are set
-        if (isset($_GET['action']) && isset($_GET['nonce'])) {
-            $nonce = sanitize_text_field(wp_unslash($_GET['nonce']));
+        if (isset($_GET['afs_crud_nonce_action']) && isset($_GET['afs_crud_nonce'])) {
+            $nonce = sanitize_text_field(wp_unslash($_GET['afs_crud_nonce']));
 
-            if (!wp_verify_nonce($nonce, 'wp_crud_nonce_action')) {
-                wp_die(esc_html_e('Unauthorized user', 'wp_crud'));
+            if (!wp_verify_nonce($nonce, 'afs_crud_nonce_action')) {
+                wp_die(esc_html_e('Invalid request: Unauthorized action.', 'afs_crud'));
             }
         }
 
@@ -95,15 +95,15 @@ class WP_CRUD_Controller
     {
         // Check for permission
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html_e('Unauthorized user', 'wp-crud'));
+            wp_die(esc_html_e('Unauthorized user', 'afs-crud'));
         }
 
         // Verify the nonce
-        check_admin_referer('wp_crud_nonce_action', 'wp_crud_nonce');
+        check_admin_referer('afs_crud_nonce_action', 'afs_crud_nonce');
 
         // Validate required fields
         if (empty($_POST['name']) || empty($_POST['email'])) {
-            wp_die(esc_html_e('Name and Email are required fields.', 'wp-crud'));
+            wp_die(esc_html_e('Name and Email are required fields.', 'afs-crud'));
         }
 
         // Sanitize user input
@@ -114,7 +114,7 @@ class WP_CRUD_Controller
         $this->model->add_user($name, $email);
 
         // Redirect with a success message
-        wp_redirect(esc_url_raw(admin_url('admin.php?page=wp-crud&message=added')));
+        wp_redirect(esc_url_raw(admin_url('admin.php?page=afs-crud&message=added')));
         exit;
     }
 
@@ -125,15 +125,15 @@ class WP_CRUD_Controller
     {
         // Check for permission
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html_e('Unauthorized user', 'wp-crud'));
+            wp_die(esc_html_e('Unauthorized user', 'afs-crud'));
         }
 
         // Verify the nonce
-        check_admin_referer('wp_crud_nonce_action', 'wp_crud_nonce');
+        check_admin_referer('afs_crud_nonce_action', 'afs_crud_nonce');
 
         // Validate required fields
         if (empty($_POST['name']) || empty($_POST['email'])) {
-            wp_die(esc_html_e('Name and Email are required fields.', 'wp-crud'));
+            wp_die(esc_html_e('Name and Email are required fields.', 'afs-crud'));
         }
 
         // Sanitize user input
@@ -145,7 +145,7 @@ class WP_CRUD_Controller
         $this->model->update_user($id, $name, $email);
 
         // Redirect with a success message
-        wp_redirect(esc_url_raw(admin_url('admin.php?page=wp-crud&message=updated')));
+        wp_redirect(esc_url_raw(admin_url('admin.php?page=afs-crud&message=updated')));
 
         exit;
     }
@@ -157,11 +157,11 @@ class WP_CRUD_Controller
     {
         // Check for permission
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html_e('Unauthorized user', 'wp-crud'));
+            wp_die(esc_html_e('Unauthorized user', 'afs-crud'));
         }
 
         // Verify the nonce
-        check_admin_referer('wp_crud_nonce_action', 'wp_crud_nonce');
+        check_admin_referer('afs_crud_nonce_action', 'afs_crud_nonce');
 
         // Get and sanitize the user ID
         $id = isset($_POST['id']) ? intval(wp_unslash($_POST['id'])) : 0;
@@ -170,20 +170,20 @@ class WP_CRUD_Controller
         $this->model->delete_user($id);
 
         // Redirect with a success message
-        wp_redirect(admin_url('admin.php?page=wp-crud&message=deleted'));
+        wp_redirect(admin_url('admin.php?page=afs-crud&message=deleted'));
         exit;
     }
 
     /**
-     * Enqueues admin-specific styles for the WP CRUD plugin.
+     * Enqueues admin-specific styles for the AFS CRUD plugin.
      *
      * @param string $hook The current admin page hook.
      */
-    public function wp_crud_enqueue_scripts($hook)
+    public function afs_crud_enqueue_scripts($hook)
     {
-        if ($hook != 'toplevel_page_wp-crud') {
+        if ($hook != 'toplevel_page_afs-crud') {
             return;
         }
-        wp_enqueue_style('wp-crud-admin', WP_CRUD_URL . 'assets/css/wp-crud-admin.css', array(), WP_CRUD_VERSION);
+        wp_enqueue_style('afs-crud-admin', AFS_CRUD_URL . 'assets/css/afs-crud-admin.css', array(), AFS_CRUD_VERSION);
     }
 }

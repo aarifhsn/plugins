@@ -7,11 +7,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WP CRUD is a simple WordPress plugin for managing custom users (Create, Read, Update, Delete) within the WordPress admin dashboard.
+AFS CRUD is a simple WordPress plugin for managing custom users (Create, Read, Update, Delete) within the WordPress admin dashboard.
 
 == Description ==
 
-WP CRUD allows administrators to manage custom users through a simple CRUD interface. The plugin provides a user-friendly interface for adding, editing, and deleting users, and supports the following features:
+AFS CRUD allows administrators to manage custom users through a simple CRUD interface. The plugin provides a user-friendly interface for adding, editing, and deleting users, and supports the following features:
 
 * Create, Read, Update, and Delete users.
 * View users in a sortable table.
@@ -22,15 +22,15 @@ WP CRUD allows administrators to manage custom users through a simple CRUD inter
 == Installation ==
 
 1. Download the plugin zip file.
-2. Upload the `wp-crud` folder to the `/wp-content/plugins/` directory.
+2. Upload the `afs-crud` folder to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
-4. Navigate to the 'WP CRUD' page in the admin dashboard to manage users.
+4. Navigate to the 'AFS CRUD' page in the admin dashboard to manage users.
 
 == Frequently Asked Questions ==
 
-= Does WP CRUD use the default WordPress users? =
+= Does AFS CRUD use the default WordPress users? =
 
-No, WP CRUD manages a custom user table independent of the WordPress user system.
+No, AFS CRUD manages a custom user table independent of the WordPress user system.
 
 = Can I sort the users in the table? =
 
@@ -48,7 +48,7 @@ Yes, the plugin includes WordPress nonce fields for security and validates/sanit
 == Upgrade Notice ==
 
 = 1.0.0 =
-This is the initial release of the WP CRUD plugin. Ensure that you back up your site before installing any new plugin.
+This is the initial release of the AFS CRUD plugin. Ensure that you back up your site before installing any new plugin.
 
 == Screenshots ==
 

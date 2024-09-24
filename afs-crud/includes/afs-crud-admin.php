@@ -1,8 +1,8 @@
 <?php
 /**
- * The main WP_CRUD_Admin class
+ * The main AFS_CRUD_Admin class
  *
- * @package WP_CRUD
+ * @package AFS_CRUD
  * @since 1.0.0
  */
 
@@ -12,13 +12,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WP_CRUD_Admin
+ * Class AFS_CRUD_Admin
  * 
  * This class handles adding the plugin's admin menu, enqueuing admin scripts,
  * and initializing any admin-related features.
  */
 
-class WP_CRUD_Admin
+class AFS_CRUD_Admin
 {
     private $controller;
 
@@ -28,7 +28,7 @@ class WP_CRUD_Admin
      */
     public function __construct()
     {
-        $this->controller = new WP_CRUD_Controller();
+        $this->controller = new AFS_CRUD_Controller();
     }
 
     /**
@@ -44,24 +44,24 @@ class WP_CRUD_Admin
     }
 
     /**
-     * Adds a new menu item in the WordPress admin dashboard for WP CRUD.
+     * Adds a new menu item in the WordPress admin dashboard for AFS CRUD.
      */
     public function add_admin_menu()
     {
-        add_menu_page(__('WP CRUD', 'wp-crud'), __('WP CRUD', 'wp-crud'), 'manage_options', 'wp-crud', [$this->controller, 'wp_crud_display_users'], 'dashicons-admin-users');
+        add_menu_page(__('AFS CRUD', 'afs-crud'), __('AFS CRUD', 'afs-crud'), 'manage_options', 'afs-crud', [$this->controller, 'afs_crud_display_users'], 'dashicons-admin-users');
     }
 
     /**
-     * Enqueues styles for the admin interface of the WP CRUD plugin.
+     * Enqueues styles for the admin interface of the AFS CRUD plugin.
      *
      * @param string $hook The current admin page hook.
      */
     public function enqueue_admin_scripts($hook)
     {
-        if ('toplevel_page_wp-crud' !== $hook) {
+        if ('toplevel_page_afs-crud' !== $hook) {
             return;
         }
 
-        wp_enqueue_style('wp-crud-admin-style', WP_CRUD_URL . 'assets/css/wp-crud-admin.css', array(), WP_CRUD_VERSION);
+        wp_enqueue_style('afs-crud-admin-style', AFS_CRUD_URL . 'assets/css/afs-crud-admin.css', array(), AFS_CRUD_VERSION);
     }
 }
