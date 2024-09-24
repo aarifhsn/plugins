@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AFS CRUD
- * Plugin URI: https://github.com/aarifhsn/plugins/tree/main/wp-crud
+ * Plugin URI: https://github.com/aarifhsn/plugins/tree/main/afs-crud
  * Description: A simple plugin for managing users with CRUD functionality.
  * Version: 1.0.0
  * Author: Arif Hassan

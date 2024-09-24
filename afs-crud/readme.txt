@@ -21,7 +21,7 @@ AFS CRUD allows administrators to manage custom users through a simple CRUD inte
 
 == Installation ==
 
-1. Download the plugin zip file.
+1. Download the plugin zip file from -https://github.com/aarifhsn/plugins/blob/main/arif_hassan_afs-crud.zip
 2. Upload the `afs-crud` folder to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
 4. Navigate to the 'AFS CRUD' page in the admin dashboard to manage users.
