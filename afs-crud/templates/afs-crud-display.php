@@ -38,6 +38,13 @@ $name_url = add_query_arg(array(
     'order' => $name_order
 ));
 
+// Toggle Role order between ASC and DESC
+$role_order = ($orderby === 'role' && $order === 'ASC') ? 'DESC' : 'ASC';
+$role_url = add_query_arg(array(
+    'orderby' => 'role',
+    'order' => $role_order
+));
+
 ?>
 
 
@@ -76,26 +83,47 @@ $name_url = add_query_arg(array(
             <label for="email"><?php echo esc_html__('Email', 'afs_crud'); ?></label>
             <input type="email" name="email" required>
         </p>
+
+        <p>
+            <label for="role"><?php echo esc_html__('Role', 'afs_crud'); ?></label>
+            <select name="role">
+                <option value="subscriber"><?php echo esc_html__('Subscriber', 'afs_crud'); ?></option>
+                <option value="contributor"><?php echo esc_html__('Contributor', 'afs_crud'); ?></option>
+                <option value="author"><?php echo esc_html__('Author', 'afs_crud'); ?></option>
+                <option value="editor"><?php echo esc_html__('Editor', 'afs_crud'); ?></option>
+                <option value="administrator"><?php echo esc_html__('Administrator', 'afs_crud'); ?></option>
+            </select>
+        </p>
         <p>
             <input type="submit" value="<?php echo esc_html__('Add User', 'afs_crud'); ?>" class="button-primary">
         </p>
     </form>
 
-    <h3><?php echo esc_html__('Existing Users', 'afs_crud'); ?> (<?php echo count($users); ?>)</h3>
+    <div>
+        <h3 class="existing_users"><?php echo esc_html__('Existing Users', 'afs_crud'); ?>
+            (<?php echo count($users); ?>)
+        </h3>
+        <p class=" search-box">
+            <label for="search"><?php echo esc_html__('Search', 'afs_crud'); ?></label>
+            <input type="search" name="search" id="search" value="<?php echo esc_attr($search); ?>">
+        </p>
+    </div>
+
     <table class="wp-list-table widefat fixed striped">
         <thead>
             <tr>
-                <th>
-                    <a href="<?php echo esc_url($id_url); ?>">ID
-                        <?php echo ($orderby === 'id') ? ($order === 'ASC' ? '▲' : '▼') : ''; ?>
-                    </a>
-                </th>
+                <th>ID</th>
                 <th>
                     <a href="<?php echo esc_url($name_url); ?>">Name
                         <?php echo ($orderby === 'name') ? ($order === 'ASC' ? '▲' : '▼') : ''; ?>
                     </a>
                 </th>
                 <th>Email</th>
+                <th>
+                    <a href="<?php echo esc_url($role_url); ?>">Role
+                        <?php echo ($orderby === 'role') ? ($order === 'ASC' ? '▲' : '▼') : ''; ?>
+                    </a>
+                </th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -106,6 +134,7 @@ $name_url = add_query_arg(array(
                         <td><?php echo esc_html($user->id); ?></td>
                         <td><?php echo esc_html($user->name); ?></td>
                         <td><?php echo esc_html($user->email); ?></td>
+                        <td><?php echo esc_html($user->role); ?></td>
                         <td>
                             <!-- Edit Button -->
 
@@ -130,5 +159,24 @@ $name_url = add_query_arg(array(
                 </tr>
             <?php } ?>
         </tbody>
+
+        <!-- show pagination  -->
+        <?php if ($total_pages > 1) { ?>
+            <div class="tablenav">
+                <div class="tablenav-pages">
+                    <?php
+                    $big = 999999999;
+                    echo paginate_links(array(
+                        'base' => str_replace($big, '%#%', esc_url(admin_url('admin.php?page=afs-crud&paged=%#%'))),
+                        'format' => '?paged=%#%',
+                        'prev_text' => __('&larr; Previous', 'afs_crud'),
+                        'next_text' => __('Next &rarr;', 'afs_crud'),
+                        'total' => $total_pages,
+                        'current' => $paged,
+                    ));
+                    ?>
+                </div>
+            </div>
+        <?php } ?>
     </table>
 </div>

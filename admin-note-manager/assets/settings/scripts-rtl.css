@@ -1,0 +1,56 @@
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./assets/js/main.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+#admin-note-manager-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #0073aa;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#admin-note-manager-panel {
+  background: #222;
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  width: 300px;
+  max-height: 400px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 15px;
+}
+
+.admin-note-item {
+  background-color: #333;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 12px;
+}
+
+h4.admin-note-title {
+  color: #ccc;
+  font-size: 16px;
+}
+
+.admin-note-actions {
+  display: flex;
+  gap: 13px;
+}
+
+.admin-note-actions button {
+  color: #fff;
+  text-decoration: none;
+}

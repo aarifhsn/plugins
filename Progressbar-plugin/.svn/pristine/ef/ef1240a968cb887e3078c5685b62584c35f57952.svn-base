@@ -1,0 +1,84 @@
+=== Custom progress bar ===
+
+Tags: progressbar, progress bar, wordpress progressbar, wordpress progress bar awesome progressbar,  multicolor progress bar, animated progress bar, bootstrap progress bar
+Requires at least: 3.0.1
+Tested up to: 3.4
+Stable tag: 4.3
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Progressbar plugin will enable awesome progress bar with various styles.
+
+
+== Description ==
+
+Progressbar plugin will enable awesome progress bar with various styles.
+you can change your progressbar with various styles with custom width, color, animation styles.
+
+demo: http://design.selfword.com/plugin/progress-bar/
+
+== Installation ==
+
+This section describes how to install the plugin and get it working.
+
+e.g.
+
+1. Upload custom-progress-bar.php to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+4. Use shortcode in posts, page or in widget
+
+
+Plugin usage -
+progress bar can be easily embedded into any page or post. To use it, simply paste this code into your post, page or widget.
+<pre>[progressbar]</pre>
+
+<strong>Usages of different progressbar, you can use this shortocode in your posts, pages or widgets.</strong>
+
+<strong>To use striped progress bar, use this shortocode</strong>
+<pre>[progressbar_striped]</pre>
+
+<strong>To use striped animated bar, use this shortocode</strong>
+<pre>[progressbar_striped class="active"]</pre>
+
+<strong>To use multicolor progress bar, use this shortocode</strong>
+<pre>[multicolor_pregress]</pre>
+
+
+<strong>To customize your progress bar, you have to use some codes with this shortcode</strong>
+
+<strong>You can use<strong> <i>width</i> <strong>for changing your progressbar width.</strong>
+
+<strong>You can use </strong> <i>bg_color</i> <strong>for changing your progressbar background-color.</strong>
+
+<strong>You can use</strong> <i>color</i> <strong>for changing your progressbar font-color.</strong> e.g.
+
+<pre>[progressbar width="60" color="#000" bg_color="#aaa"]</pre>
+
+<pre>[progressbar_striped width="25" color="#ddd" bg_color="#000"]</pre>
+
+<strong>Also you can use </strong> <i>text</i> <strong> for changing your progressbar text over the progressbar</strong>
+
+<pre>[progressbar_striped width="25" color="#ddd" text="25% completed"]</pre>
+
+<strong>You can use</strong> <i>class="active"</i> on [progressbar_striped] <strong>shortcode to animate your striped progressbar</strong>
+
+<pre>[progressbar_striped class="active" width="25" color="#ddd" bg_color="#000"]</pre>
+
+== Screenshots ==
+
+1. screenshot-1
+2. screenshot-2
+3. screenshot-3
+4. screenshot-4
+5. screenshot-5
+6. screenshot-6
+7. screenshot-7
+
+
+== Changelog ==
+
+= 1.0 =
+* Initial Release
+
+

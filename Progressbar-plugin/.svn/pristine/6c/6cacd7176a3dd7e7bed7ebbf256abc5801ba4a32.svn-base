@@ -1,0 +1,123 @@
+<?php
+/*
+Plugin Name: custom progress bar
+Plugin URI: http://design.selfword.com/plugin/progress-bar/
+Description: Add various designed progressbar in your post/ page. also you can use this on widget and customize with your own color and styles 
+Author: arif hassan
+Author URI: http://selfword.com
+Version: 1.0
+*/
+
+
+/*Seting Up*/
+define('SELF_PROGRESS_PLUGIN_PATH', WP_PLUGIN_URL . '/' . plugin_basename( dirname(__FILE__) ) . '/' );
+
+
+/* Adding Latest jQuery from Wordpress */
+function self_progressbar_latest_jquery_wp() {
+	wp_enqueue_script('jquery');
+}
+add_action('init', 'self_progressbar_latest_jquery_wp');
+
+// Enable shortcodes in widgets
+add_filter('widget_text', 'do_shortcode');
+
+
+
+/* Plugin javascript Main file */
+
+
+function progressbar_wp_enqueue_jquery() {
+
+	wp_enqueue_script('self-progress-plugin-script', SELF_PROGRESS_PLUGIN_PATH.'js/bootstrap.min.js', array('jquery'));
+}
+
+add_action ('init', 'progressbar_wp_enqueue_jquery');
+
+
+/* Adding Plugin custm CSS file */
+function progressbar_stylesheet_to_admin() {
+
+wp_enqueue_style('self-progressbar-plugin-style', SELF_PROGRESS_PLUGIN_PATH.'custom-progressbar.css');
+wp_enqueue_style('self-progressbar-bootstrap-style', SELF_PROGRESS_PLUGIN_PATH.'css/custom.bootstrap.css');
+}
+add_action ('init', 'progressbar_stylesheet_to_admin');
+
+
+
+function progressbar_shortcode( $atts, $content = null  ) {
+
+	extract( shortcode_atts( array(
+		'width' => '40',
+		'text' => '',
+		'bg_color' => '#428BCA',
+		'color' => '#fff'
+	), $atts ) );
+
+	return '
+		<div class="progress">
+			 <div class="progress-bar" role="progressbar" aria-valuenow="'.$width.'" aria-valuemin="0" aria-valuemax="100"
+				style="width: '.$width.'%; background-color: '.$bg_color.'">
+				<span style="color: '.$color.'" class="sr-only">'.$text.'</span>
+			</div>
+		</div>
+	';
+}	
+add_shortcode('progressbar', 'progressbar_shortcode');
+
+
+function progressbar_striped_shortcode( $atts, $content = null  ) {
+
+	extract( shortcode_atts( array(
+		'width' => '50',
+		'text' => '',
+		'bg_color' => '#D9534F',
+		'color' => '#fff',
+		'class' => ''
+	), $atts ) );
+
+	return '
+		<div class="progress progress-striped '.$class.'">
+		  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'.$width.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$width.'%; background-color: '.$bg_color.'">
+			<span style="color: '.$color.'" class="sr-only">'.$text.'</span>
+		  </div>
+		</div>
+	';
+}	
+add_shortcode('progressbar_striped', 'progressbar_striped_shortcode');
+
+
+
+function multi_progressbar_shortcode( $atts, $content = null  ) {
+
+	extract( shortcode_atts( array(
+		'width_1' => '25',
+		'width_2' => '20',
+		'width_3' => '30',
+		'text_1' => '',
+		'text_2' => '',
+		'text_3' => '',
+		'bg_color_1' => '#D9534F',
+		'bg_color_2' => '#005500',
+		'bg_color_3' => '#99aadd',
+		'color' => '#fff',
+		'class' => ''
+	), $atts ) );
+
+	return '
+		<div class="progress">
+		  <div class="progress-bar progress-bar-success" style="width: '.$width_1.'%; background-color: '.$bg_color_1.'">
+			<span style="color: '.$color.'" class="sr-only">'.$text_1.'</span>
+		  </div>
+		  <div class="progress-bar progress-bar-warning" style="width: '.$width_2.'%; background-color: '.$bg_color_2.'">
+			<span style="color: '.$color.'" class="sr-only">'.$text_2.'</span>
+		  </div>
+		  <div class="progress-bar progress-bar-danger" style="width: '.$width_3.'%; background-color: '.$bg_color_3.'">
+			<span style="color: '.$color.'" class="sr-only">'.$text_3.'</span>
+		  </div>
+		</div>
+	';
+}	
+add_shortcode('multicolor_pregress', 'multi_progressbar_shortcode');
+
+?>

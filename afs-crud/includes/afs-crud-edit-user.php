@@ -56,6 +56,28 @@ if (!defined('ABSPATH')) {
                     value="<?php echo isset($user->email) ? esc_attr($user->email) : ''; ?>" required>
             </p>
 
+            <!-- Role field -->
+            <p>
+                <label for="role"><?php echo esc_html__('Role', 'afs_crud'); ?></label>
+                <select name="role">
+                    <option value="subscriber" <?php selected($user->role, 'subscriber'); ?>>
+                        <?php echo esc_html__('Subscriber', 'afs_crud'); ?>
+                    </option>
+                    <option value="contributor" <?php selected($user->role, 'contributor'); ?>>
+                        <?php echo esc_html__('Contributor', 'afs_crud'); ?>
+                    </option>
+                    <option value="author" <?php selected($user->role, 'author'); ?>>
+                        <?php echo esc_html__('Author', 'afs_crud'); ?>
+                    </option>
+                    <option value="editor" <?php selected($user->role, 'editor'); ?>>
+                        <?php echo esc_html__('Editor', 'afs_crud'); ?>
+                    </option>
+                    <option value="administrator" <?php selected($user->role, 'administrator'); ?>>
+                        <?php echo esc_html__('Administrator', 'afs_crud'); ?>
+                    </option>
+                </select>
+            </p>
+
             <!-- Submit button -->
             <p>
                 <input type="submit" value="<?php echo esc_html__('Update User', 'afs_crud'); ?>"

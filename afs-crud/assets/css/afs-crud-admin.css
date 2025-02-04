@@ -3,6 +3,12 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.afs_crud_wrap {
+  width: 90%;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 20px;
+}
 .afs_crud_wrap h1,
 .afs_crud_page_title h1 {
   margin: 20px 0 40px 0;
@@ -19,6 +25,11 @@ body {
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
+  align-items: center;
+  padding: 40px 10px 40px 10px;
+  background-color: #ffff;
+  border-radius: 5px;
+}
 }
 
 .afs_crud_wrap .afs_crud_form input[type="text"],
@@ -66,7 +77,6 @@ body {
 
 /* Table Styles */
 .afs_crud_wrap table {
-  width: 90%;
   border-collapse: collapse;
   margin: 20px 0;
 }
@@ -108,4 +118,8 @@ body {
 
 .afs_crud_wrap .button-secondary:hover {
   background-color: #ddd;
+}
+
+.existing_users {
+  float: left;
 }

@@ -47,6 +47,7 @@ class AFS_CRUD_Model
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             name varchar(255) NOT NULL,
             email varchar(255) NOT NULL,
+            role varchar(50) default 'subscriber',
             PRIMARY KEY (id)
         ) $charset_collate;";
 
@@ -113,11 +114,11 @@ class AFS_CRUD_Model
      * 
      * @since 1.0.0
      */
-    public function add_user($name, $email)
+    public function add_user($name, $email, $role)
     {
         global $wpdb;
         // Insert a new row into the table with the provided name and email.
-        $wpdb->insert($this->table_name, ['name' => $name, 'email' => $email]);
+        $wpdb->insert($this->table_name, ['name' => $name, 'email' => $email, 'role' => $role]);
     }
 
     /**
@@ -129,10 +130,10 @@ class AFS_CRUD_Model
      * 
      * @since 1.0.0
      */
-    public function update_user($id, $name, $email)
+    public function update_user($id, $name, $email, $role)
     {
         global $wpdb;
-        $wpdb->update($this->table_name, ['name' => $name, 'email' => $email], ['id' => $id]);
+        $wpdb->update($this->table_name, ['name' => $name, 'email' => $email, 'role' => $role], ['id' => $id]);
     }
 
     /**

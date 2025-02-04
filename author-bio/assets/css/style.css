@@ -1,4 +1,4 @@
-ul.socials {
+/* ul.socials {
   display: flex;
   gap: 8px;
   list-style: none;
@@ -12,4 +12,55 @@ ul.socials li {
 
 ul.socials li a {
   text-decoration: none;
+} */
+
+/* Basic styling for the bio section */
+.bio_wrap {
+  display: flex;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.bio_wrap .avatar {
+  flex: 0 0 64px;
+  margin-right: 20px;
+}
+
+.bio_wrap .bio_content {
+  flex: 1;
+}
+
+.bio_wrap .author_name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.bio_wrap .author_bio {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.bio_wrap .socials {
+  list-style: none;
+  padding: 0;
+}
+
+.bio_wrap .socials li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.bio_wrap .socials a {
+  text-decoration: none;
+  color: #0073aa;
+  font-weight: bold;
+}
+
+.bio_wrap .socials a:hover {
+  color: #005177;
 }

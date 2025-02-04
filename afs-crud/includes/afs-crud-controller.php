@@ -78,7 +78,7 @@ class AFS_CRUD_Controller
             $order = strtolower($order);
 
             // Ensure $orderby is a valid column name to prevent SQL injection
-            $valid_columns = ['id', 'name', 'email'];
+            $valid_columns = ['id', 'name', 'email', 'role'];
             if (!in_array($orderby, $valid_columns)) {
                 $orderby = 'id';
             }
@@ -109,9 +109,10 @@ class AFS_CRUD_Controller
         // Sanitize user input
         $name = sanitize_text_field(wp_unslash($_POST['name']));
         $email = sanitize_email(wp_unslash($_POST['email']));
+        $role = sanitize_text_field(wp_unslash($_POST['role']));
 
         // Add user to the database
-        $this->model->add_user($name, $email);
+        $this->model->add_user($name, $email, $role);
 
         // Redirect with a success message
         wp_redirect(esc_url_raw(admin_url('admin.php?page=afs-crud&message=added')));
@@ -140,9 +141,10 @@ class AFS_CRUD_Controller
         $id = isset($_POST['id']) ? intval(wp_unslash($_POST['id'])) : 0;
         $name = sanitize_text_field(wp_unslash($_POST['name']));
         $email = sanitize_email(wp_unslash($_POST['email']));
+        $role = sanitize_text_field(wp_unslash($_POST['role']));
 
         // Update user in the database
-        $this->model->update_user($id, $name, $email);
+        $this->model->update_user($id, $name, $email, $role);
 
         // Redirect with a success message
         wp_redirect(esc_url_raw(admin_url('admin.php?page=afs-crud&message=updated')));

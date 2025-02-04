@@ -12,7 +12,8 @@
  * Text Domain: afdevs
  **/
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH'))
+    exit;
 
 if (is_admin()) {
     // inclue includes/admin/profile.php file
@@ -36,7 +37,7 @@ function afdevs_author_bio($content)
     // this function will keep all the content below in its memory without returning. then when we clean this buffer , then it will return all together. 
 
     ob_start();
-?>
+    ?>
     <div class="bio_wrap">
         <div class="avatar">
             <?php echo get_avatar($author->ID, 64); ?>
@@ -60,7 +61,7 @@ function afdevs_author_bio($content)
             </ul>
         </div>
     </div>
-<?php
+    <?php
     $bio_content = ob_get_clean();
 
     return $content . $bio_content;
