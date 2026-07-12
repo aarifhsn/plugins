@@ -4,6 +4,6 @@
     "start": "wp-scripts start ./assets/js/scripts.js --output-path=./assets/settings"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^30.0.2"
+    "@wordpress/scripts": "^32.6.0"
   }
 }
